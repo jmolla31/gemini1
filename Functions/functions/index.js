@@ -1,6 +1,6 @@
 const admin = require('firebase-admin');
 const functions = require('firebase-functions');
-var serviceAccount = require("./secrets/serviceAccount.json");
+const serviceAccount = require("./secrets/serviceAccount.json");
 const cors = require('cors')({origin: true});
 
 admin.initializeApp({
@@ -12,11 +12,18 @@ var db = admin.firestore();
 
 //Import all functions
 const getItemCount = require('./getItemCount');
+const getLastItemsCount = require('./getLastItemsCount');
 
 
 exports.getItemCount = functions.https.onRequest((req, res) => {
 
   getItemCount.handler(req,res,db, cors);
+
+});
+
+exports.getLastItemsCount = functions.https.onRequest((req, res) => {
+
+  getLastItemsCount.handler(req,res,db, cors);
 
 });
 

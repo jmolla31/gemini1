@@ -1,19 +1,25 @@
 exports.handler = function (req, res, database,cors) {
- 
+
+  const momentjs = require('moment');
+
   cors(req,res, ()=> {
     console.log("Function processed");
   })
 
-  var today = new Date();
+  var compareDate = momentjs().subtract(30, 'days');
 
-  database.collection('items').where("entryDate").get().then(query => {
+ database.collection('items').get().then(query => {
 
     var count = 0;
 
-    query.forEach( x => count++);
+    query.forEach( item => {
+      
+      var itemDate = momentjs(item.data().entryDate);
+
+      if (momentjs(itemDate).isSameOrAfter(compareDate)) count++
+
+    });
 
     res.status(200).send(count.toString());
-
   });
-  
 }
