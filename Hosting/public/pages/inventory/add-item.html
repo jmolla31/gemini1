@@ -96,10 +96,10 @@
             </a>
             <div class="collapse show" id="inventory-dropdown">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/inventory/tables.html">Consultar taules</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/inventory/categories.html">Consultar categories</a></li>
-                <li class="nav-item"> <a class="nav-link active" href="pages/inventory/add-item.html">Afegir item</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/inventory/add-category.html">Afegir categoria</a></li>
+                <li class="nav-item"> <a class="nav-link" href="tables.html">Consultar taules</a></li>
+                <li class="nav-item"> <a class="nav-link" href="categories.html">Consultar categories</a></li>
+                <li class="nav-item"> <a class="nav-link active" href="add-item.html">Afegir item</a></li>
+                <li class="nav-item"> <a class="nav-link" href="add-category.html">Afegir categoria</a></li>
               </ul>
             </div>
           </li>
@@ -147,26 +147,26 @@
           <div class="col-12 grid-margin">
             <div class="card">
               <div class="card-body">
-                <h4 class="card-title">Horizontal Two column</h4>
+                <h4 class="card-title">Afegir nou ítem</h4>
 
                 <form class="form-sample">
                   <p class="card-description">
-                    Personal info
+                    Dades de lítem
                   </p>
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">First Name</label>
+                        <label class="col-sm-3 col-form-label">Nom</label>
                         <div class="col-sm-9">
-                          <input type="text" class="form-control" />
+                          <input type="text" class="form-control" id="name" />
                         </div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Last Name</label>
+                        <label class="col-sm-3 col-form-label">Descripció</label>
                         <div class="col-sm-9">
-                          <input type="text" class="form-control" />
+                          <input type="text" class="form-control" id="card-description" />
                         </div>
                       </div>
                     </div>
@@ -174,9 +174,9 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Gender</label>
+                        <label class="col-sm-3 col-form-label">Categoria principal</label>
                         <div class="col-sm-9">
-                          <select class="form-control">
+                          <select class="form-control" id="mainCategory">
                             <option>Male</option>
                             <option>Female</option>
                           </select>
@@ -185,9 +185,9 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Date of Birth</label>
+                        <label class="col-sm-3 col-form-label">Data entrada</label>
                         <div class="col-sm-9">
-                          <input class="form-control" placeholder="dd/mm/yyyy" />
+                          <input class="form-control" placeholder="dd/mm/yyyy" id="entryDate" />
                         </div>
                       </div>
                     </div>
@@ -195,9 +195,9 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Category</label>
+                        <label class="col-sm-3 col-form-label">Categoria secundària</label>
                         <div class="col-sm-9">
-                          <select class="form-control">
+                          <select class="form-control" id="secondaryCategory">
                             <option>Category1</option>
                             <option>Category2</option>
                             <option>Category3</option>
@@ -208,7 +208,7 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Membership</label>
+                        <label class="col-sm-3 col-form-label">Protecció</label>
                         <div class="col-sm-4">
                           <div class="form-check">
                             <label class="form-check-label">
@@ -226,68 +226,6 @@
                               Professional
                             </label>
                           </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="card-description">
-                    Address
-                  </p>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Address 1</label>
-                        <div class="col-sm-9">
-                          <input type="text" class="form-control" />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">State</label>
-                        <div class="col-sm-9">
-                          <input type="text" class="form-control" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Address 2</label>
-                        <div class="col-sm-9">
-                          <input type="text" class="form-control" />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Postcode</label>
-                        <div class="col-sm-9">
-                          <input type="text" class="form-control" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">City</label>
-                        <div class="col-sm-9">
-                          <input type="text" class="form-control" />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Country</label>
-                        <div class="col-sm-9">
-                          <select class="form-control">
-                            <option>America</option>
-                            <option>Italy</option>
-                            <option>Russia</option>
-                            <option>Britain</option>
-                          </select>
                         </div>
                       </div>
                     </div>

@@ -13,6 +13,8 @@ var db = admin.firestore();
 //Import all functions
 const getItemCount = require('./getItemCount');
 const getLastItemsCount = require('./getLastItemsCount');
+const getAllItems = require('./getAllItems');
+const addItem = require('./addItem');
 
 
 exports.getItemCount = functions.https.onRequest((req, res) => {
@@ -24,6 +26,12 @@ exports.getItemCount = functions.https.onRequest((req, res) => {
 exports.getLastItemsCount = functions.https.onRequest((req, res) => {
 
   getLastItemsCount.handler(req,res,db, cors);
+
+});
+
+exports.getAllItems = functions.https.onRequest((req,res) => {
+
+  getAllItems.handler(req,res,db);
 
 });
 
