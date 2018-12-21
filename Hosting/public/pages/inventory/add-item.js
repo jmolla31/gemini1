@@ -1,1 +1,0 @@
-var httpService = new HttpClient();
