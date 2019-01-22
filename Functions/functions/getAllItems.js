@@ -10,13 +10,13 @@ exports.handler = function (req, res, database) {
 
       var item = {
 
-        id = x.id,
-        name = x.data().name,
-        description = x.data().description,
-        entryDate = x.data().entryDate,
-        locked = x.data().locked,
-        mainCategory = x.data().mainCategory,
-        secondaryCategory = x.data().secondaryCategory
+        id: x.id,
+        name: x.data().name,
+        description: x.data().description,
+        entryDate: x.data().entryDate,
+        locked: x.data().locked,
+        mainCategory: x.data().mainCategory,
+        secondaryCategory: x.data().secondaryCategory
 
       };
 
@@ -25,6 +25,8 @@ exports.handler = function (req, res, database) {
       resArray.push(item);
     });
 
+
+    res.set('Access-Control-Allow-Origin', '*');
     res.status(200).send(resArray);
 
   });

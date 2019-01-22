@@ -15,11 +15,18 @@ const getItemCount = require('./getItemCount');
 const getLastItemsCount = require('./getLastItemsCount');
 const getAllItems = require('./getAllItems');
 const addItem = require('./addItem');
+const getCategoryCount = require('./getCategoryCount');
 
 
 exports.getItemCount = functions.https.onRequest((req, res) => {
 
   getItemCount.handler(req,res,db, cors);
+
+});
+
+exports.getCategoryCount = functions.https.onRequest((req, res) => {
+
+  getCategoryCount.handler(req,res,db, cors);
 
 });
 

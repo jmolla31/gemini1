@@ -1,362 +1,186 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Gemini 1</title>
-  <!-- plugins:css -->
-  <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
-  <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
-  <!-- endinject -->
-  <!-- inject:css -->
-  <link rel="stylesheet" href="css/style.css">
-  <!-- endinject -->
-  <link rel="shortcut icon" href="images/favicon.png" />
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- <link rel="icon" href="../../../../favicon.ico"> -->
+
+  <title>Suamo - Gemini1</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+  crossorigin="anonymous">
+  <!-- Custom styles for this template -->
+  <link href="index.css" rel="stylesheet">
 </head>
+
 <body>
-  <div class="container-scroller">
-    <!-- partial:partials/_navbar.html -->
-    <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo" href="index.html"><img src="images/logo.svg" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo"/></a>
-      </div>
-      <div class="navbar-menu-wrapper d-flex align-items-stretch">
-        <div class="search-field d-none d-md-block">
-          <form class="d-flex align-items-center h-100" action="#">
-            <div class="input-group">
-              <div class="input-group-prepend bg-transparent">
-                  <i class="input-group-text border-0 mdi mdi-magnify"></i>                
-              </div>
-              <input type="text" class="form-control bg-transparent border-0" placeholder="Search projects">
-            </div>
-          </form>
+  <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Suamo - Gemini</a>
+    <input class="form-control form-control-dark w-100" id="searchtext" type="text" placeholder="Buscar codi" aria-label="Buscar codi">
+    <ul class="navbar-nav px-3">
+      <li class="nav-item text-nowrap">
+        <a class="nav-link" id="search" href="#">Buscar</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav px-3">
+      <li class="nav-item text-nowrap">
+        <a class="nav-link" href="#">Eixir</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">
+                <span data-feather="home"></span>
+                Dashboard <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./pages/items/items.html">
+                <span data-feather="file"></span>
+                Items
+              </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./pages/items/items.html">
+                  <span data-feather="file"></span>
+                  Categories
+                </a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span data-feather="shopping-cart"></span>
+                Partitures
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span data-feather="users"></span>
+                Préstecs
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span data-feather="bar-chart-2"></span>
+                Incidencies
+              </a>
+            </li>
+          </ul>
         </div>
-        <ul class="navbar-nav navbar-nav-right">
-          <li class="nav-item d-none d-lg-block full-screen-link">
-            <a class="nav-link">
-              <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
-            </a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
-              <i class="mdi mdi-bell-outline"></i>
-              <span class="count-symbol bg-danger"></span>
-            </a>
-          </li>
-          <li class="nav-item nav-logout d-none d-lg-block">
-            <a class="nav-link" href="#">
-              <i class="mdi mdi-power"></i>
-            </a>
-          </li>
-        </ul>
-        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-          <span class="mdi mdi-menu"></span>
-        </button>
-      </div>
-    </nav>
-    <!-- partial -->
-    <div class="container-fluid page-body-wrapper">
-      <!-- partial:partials/_sidebar.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <ul class="nav">
-          <li class="nav-item nav-profile">
-            <a href="#" class="nav-link">
-              <div class="nav-profile-image">
-                <img src="images/faces/face1.jpg" alt="profile">
-                <span class="login-status online"></span> <!--change to offline or busy as needed-->              
-              </div>
-              <div class="nav-profile-text d-flex flex-column">
-                <span class="font-weight-bold mb-2">David Grey. H</span>
-                <span class="text-secondary text-small">Project Manager</span>
-              </div>
-              <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
-            </a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="index.html">
-              <span class="menu-title">Dashboard</span>
-              <i class="mdi mdi-home menu-icon"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#inventory-dropdown" aria-expanded="false" aria-controls="ui-basic">
-              <span class="menu-title">Inventari</span>
-              <i class="menu-arrow"></i>
-              <i class="mdi mdi-folder-multiple-outline menu-icon"></i>
-            </a>
-            <div class="collapse" id="inventory-dropdown">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/inventory/tables.html">Consultar taules</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/inventory/categories.html">Consultar categories</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/inventory/add-item.html">Afegir item</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/inventory/add-category.html">Afegir categoria</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#loans-dropdown" aria-expanded="false" aria-controls="ui-basic">
-              <span class="menu-title">Préstecs</span>
-              <i class="menu-arrow"></i>
-              <i class="mdi mdi-folder-multiple-outline menu-icon"></i>
-            </a>
-            <div class="collapse" id="loans-dropdown">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Consultar taules</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Afegir préstec</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#archive-dropdown" aria-expanded="false" aria-controls="ui-basic">
-              <span class="menu-title">Arxiu digital</span>
-              <i class="menu-arrow"></i>
-              <i class="mdi mdi-folder-multiple-outline menu-icon"></i>
-            </a>
-            <div class="collapse" id="archive-dropdown">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Consultar taules</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Afegir partitures</a></li>
-              </ul>
-            </div>
-          </li>
-        </ul>
       </nav>
-      <!-- partial -->
-      <div class="main-panel">
-        <div class="content-wrapper">
-          <div class="page-header">
-            <h3 class="page-title">
-              <span class="page-title-icon bg-gradient-primary text-white mr-2">
-                <i class="mdi mdi-home"></i>                 
-              </span>
-              Pàgina principal
-            </h3>
-            <nav aria-label="breadcrumb">
-              <ul class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">
-                  <span></span>Temps real
-                  <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle" data-toggle="modal" data-target="#exampleModal"></i>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <div class="row">
-            <div class="col-md-4 stretch-card grid-margin">
-              <div class="card bg-gradient-danger card-img-holder text-white">
-                <div class="card-body">
-                  <img src="images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
-                  <h4 class="font-weight-normal mb-3">Ítems
-                    <i class="mdi mdi-chart-line mdi-24px float-right"></i>
-                  </h4>
-                  <h2 class="mb-5" id="totalItems">570</h2>
-                  <h6 class="card-text" id="lastItems">30 Afegits aquest mes.</h6>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 stretch-card grid-margin">
-              <div class="card bg-gradient-info card-img-holder text-white">
-                <div class="card-body">
-                  <img src="images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>                  
-                  <h4 class="font-weight-normal mb-3">Partitures
-                    <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
-                  </h4>
-                  <h2 class="mb-5">1200</h2>
-                  <h6 class="card-text">100 digitalitzades</h6>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 stretch-card grid-margin">
-              <div class="card bg-gradient-success card-img-holder text-white">
-                <div class="card-body">
-                  <img src="images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>                                    
-                  <h4 class="font-weight-normal mb-3">Préstecs
-                    <i class="mdi mdi-diamond mdi-24px float-right"></i>
-                  </h4>
-                  <h2 class="mb-5">95</h2>
-                  <h6 class="card-text">5 afegits aquest mes</h6>
-                </div>
-              </div>
+
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+          <h1 class="h2">Dashboard</h1>
+        </div>
+
+
+        <div class="card-deck">
+          <div class="card text-white bg-info">
+            <div class="card-body">
+              <h5 class="card-title">Total ítems</h5>
+              <h1 class="card-text" id="totalitems">11</h1>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Project Status</h4>
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th>
-                            #
-                          </th>
-                          <th>
-                            Name
-                          </th>
-                          <th>
-                            Due Date
-                          </th>
-                          <th>
-                            Progress
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            1
-                          </td>
-                          <td>
-                            Herman Beck
-                          </td>
-                          <td>
-                            May 15, 2015
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            2
-                          </td>
-                          <td>
-                            Messsy Adam
-                          </td>
-                          <td>
-                            Jul 01, 2015
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            3
-                          </td>
-                          <td>
-                            John Richards
-                          </td>
-                          <td>
-                            Apr 12, 2015
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            4
-                          </td>
-                          <td>
-                            Peter Meggik
-                          </td>
-                          <td>
-                            May 15, 2015
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            5
-                          </td>
-                          <td>
-                            Edward
-                          </td>
-                          <td>
-                            May 03, 2015
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-danger" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            5
-                          </td>
-                          <td>
-                            Ronald
-                          </td>
-                          <td>
-                            Jun 05, 2015
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
+          <div class="card text-white bg-primary">
+            <div class="card-body">
+              <h5 class="card-title">Total categories</h5>
+              <h1 class="card-text" id="totalcategories">11</h1>
+            </div>
+          </div>
+          <div class="card text-white bg-warning">
+            <div class="card-body">
+              <h5 class="card-title">Préstecs oberts</h5>
+              <h1 class="card-text">00</h1>
+            </div>
+          </div>
+          <div class="card text-white bg-danger">
+            <div class="card-body">
+              <h5 class="card-title">Incidencies obertes</h5>
+              <h1 class="card-text">00</h1>
             </div>
           </div>
         </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.html -->
-        <footer class="footer">
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2019 Javi Mollà</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"><i class="mdi mdi-heart text-danger"></i> Roperia</span>
-          </div>
-        </footer>
-        <!-- partial -->
-      </div>
-      <!-- main-panel ends -->
+
+        </br>
+
+        <h2>Últims ítems afegits</h2>
+        <div class="table-responsive">
+          <table class="table table-striped table-sm" id="itemsTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th>Descripció</th>
+                <th>C. Principal</th>
+                <th>C. Secundària</th>
+                <th>Data entrada</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Últims prestecs oberts</h2>
+        <div class="table-responsive">
+          <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Item</th>
+                <th>Usuari</th>
+                <th>Data obertura</th>
+                <th>Data límit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1,001</td>
+                <td>Lorem</td>
+                <td>ipsum</td>
+                <td>dolor</td>
+                <td>sit</td>
+              </tr>
+              <tr>
+                <td>1,015</td>
+                <td>sodales</td>
+                <td>ligula</td>
+                <td>in</td>
+                <td>libero</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </main>
     </div>
-    <!-- page-body-wrapper ends -->
   </div>
-  <!-- container-scroller -->
 
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Les dades d'aquesta pàgina s'actualitzen a temps real, si hi ha una connexió a internet activa al dispositiu,
-        per a vore dades detallades fixes accediu a la seua pàgina corresponent.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Tancar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-  <!-- plugins:js -->
-  <script src="vendors/js/vendor.bundle.base.js"></script>
-  <script src="vendors/js/vendor.bundle.addons.js"></script>
-  <script src="vendors/js/vendor.bundle.addons.js"></script>
-  <script src="./js/common/httpService.js"></script>
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
+  <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
   <script src="index.js"></script>
-  <!-- endinject -->
+  <script>
+    feather.replace()
+  </script>
 </body>
 
 </html>
