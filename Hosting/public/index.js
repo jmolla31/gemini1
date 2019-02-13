@@ -78,7 +78,6 @@ document.getElementById("search").addEventListener("click", x => {
     'question'
   )
 
-
   var text = document.getElementById("searchtext").value;
 
   console.log("Searching for: " + text);

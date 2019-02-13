@@ -1,7 +1,7 @@
 const admin = require('firebase-admin');
 const functions = require('firebase-functions');
 const serviceAccount = require("./secrets/serviceAccount.json");
-const cors = require('cors')({origin: true});
+const cors = require('cors')({ origin: true });
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -16,29 +16,32 @@ const getLastItemsCount = require('./getLastItemsCount');
 const getAllItems = require('./getAllItems');
 const addItem = require('./addItem');
 const getCategoryCount = require('./getCategoryCount');
+const getItemDetails = require('./getItemDetails');
 
+
+exports.getItemDetails = functions.https.onRequest((req, res) => { getItemDetails.handler(req, res, db, cors); });
 
 exports.getItemCount = functions.https.onRequest((req, res) => {
 
-  getItemCount.handler(req,res,db, cors);
+  getItemCount.handler(req, res, db, cors);
 
 });
 
 exports.getCategoryCount = functions.https.onRequest((req, res) => {
 
-  getCategoryCount.handler(req,res,db, cors);
+  getCategoryCount.handler(req, res, db, cors);
 
 });
 
 exports.getLastItemsCount = functions.https.onRequest((req, res) => {
 
-  getLastItemsCount.handler(req,res,db, cors);
+  getLastItemsCount.handler(req, res, db, cors);
 
 });
 
-exports.getAllItems = functions.https.onRequest((req,res) => {
+exports.getAllItems = functions.https.onRequest((req, res) => {
 
-  getAllItems.handler(req,res,db);
+  getAllItems.handler(req, res, db);
 
 });
 
