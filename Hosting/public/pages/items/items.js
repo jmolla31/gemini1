@@ -1,3 +1,15 @@
+const getAllItemsUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/getAllItems";
+
+function httpGetAsync(url, callback) {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.onreadystatechange = function () {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+      callback(xmlHttp.responseText);
+  }
+  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.send(null);
+}
+
 document.getElementById("entryDate").value = new Date(Date.now()).toLocaleDateString();
 
 document.getElementById("btnSave").addEventListener("click", x => {
@@ -32,3 +44,28 @@ document.getElementById("btnSave").addEventListener("click", x => {
   console.log(itemObject);
 
 });
+
+
+var dataTable = $('#itemsTable').DataTable({
+  "bLengthChange": false,
+  "ordering": false,
+  "info": false,
+  "columns": [
+    { "data": "id" },
+    { "data": "name" },
+    { "data": "description" },
+    { "data": "mainCategory" },
+    { "data": "secondaryCategory" },
+    { "data": "entryDate" },
+  ]
+});
+
+httpGetAsync(getAllItemsUrl, data => {
+
+  data = JSON.parse(data);
+  console.log(data);
+
+  this.dataTable.rows.add(data).draw();
+});
+
+
