@@ -1,8 +1,7 @@
-exports.handler = function (req, res, database, cors) {
+exports.handler = function (req, res, database) {
 
-  cors(req, res, () => {
-    console.log("Function processed");
-  })
+  console.log("Function processed");
+  res.set('Access-Control-Allow-Origin', '*');
 
   var docId = req.query.docId;
 

@@ -7,15 +7,14 @@ const getTicketCount = "https://us-central1-gemini1-48753.cloudfunctions.net/get
 //const Swal = require('sweetalert2');
 
 
-function httpGetAsync(url, callback)
-{
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-            callback(xmlHttp.responseText);
-    }
-    xmlHttp.open("GET", url, true); // true for asynchronous 
-    xmlHttp.send(null);
+function httpGetAsync(url, callback) {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.onreadystatechange = function () {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+      callback(xmlHttp.responseText);
+  }
+  xmlHttp.open("GET", url, true); // true for asynchronous 
+  xmlHttp.send(null);
 }
 
 httpGetAsync(getAllItemsUrl, data => {
@@ -29,10 +28,10 @@ httpGetAsync(getAllItemsUrl, data => {
 
   var loop = 1;
 
-  data.forEach( x => {
+  data.forEach(x => {
 
-    var newRow   = tableRef.insertRow(tableRef.rows.length);
-    var countCell  = newRow.insertCell(0);
+    var newRow = tableRef.insertRow(tableRef.rows.length);
+    var countCell = newRow.insertCell(0);
     countCell.innerHTML = loop; loop++;
 
     var nameCell = newRow.insertCell(1);
