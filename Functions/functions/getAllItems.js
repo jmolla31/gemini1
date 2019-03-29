@@ -1,12 +1,12 @@
 exports.handler = function (req, res, database) {
- 
-    console.log("Function processed");
+
+  console.log("Function processed");
 
   database.collection('items').get().then(query => {
 
     var resArray = [];
 
-    query.forEach( x => {
+    query.forEach(x => {
 
       var item = {
 
@@ -20,8 +20,6 @@ exports.handler = function (req, res, database) {
 
       };
 
-      var duh = item.id;
-
       resArray.push(item);
     });
 
@@ -30,5 +28,5 @@ exports.handler = function (req, res, database) {
     res.status(200).send(resArray);
 
   });
-  
+
 }
