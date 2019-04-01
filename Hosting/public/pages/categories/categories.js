@@ -56,7 +56,7 @@ document.getElementById("btnSave").addEventListener("click", x => {
 });
 
 
-var dataTable = $('#itemsTable').DataTable({
+var dataTable = $('#categoriesTable').DataTable({
   "bLengthChange": false,
   "ordering": false,
   "info": false,
@@ -64,13 +64,15 @@ var dataTable = $('#itemsTable').DataTable({
     { "data": "id" },
     { "data": "name" },
     { "data": "description" },
-    { "data": "mainCategory" },
-    { "data": "secondaryCategory" },
-    { "data": "entryDate" },
+    { "data": "parentCategory" },
+    {
+      "data": null,
+      "defaultContent": "<button>Editar</button>"
+    }
   ]
 });
 
-httpGetAsync(getAllItemsUrl, data => {
+httpGetAsync(getAllCategoriesUrl, data => {
 
   data = JSON.parse(data);
   console.log(data);

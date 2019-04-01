@@ -68,17 +68,3 @@ httpGetAsync(getCategoryCount, categoryCount => {
   htmlItem.innerHTML = categoryCount;
 
 });
-
-document.getElementById("search").addEventListener("click", x => {
-
-  Swal(
-    'The Internet?',
-    'That thing is still around?',
-    'question'
-  )
-
-  var text = document.getElementById("searchtext").value;
-
-  console.log("Searching for: " + text);
-
-});
