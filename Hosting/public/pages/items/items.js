@@ -1,5 +1,9 @@
 const getAllItemsUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/getAllItems";
 const getItemDetails = "https://us-central1-gemini1-48753.cloudfunctions.net/getItemDetails";
+const getAllCategoriesUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/getAllCategories";
+
+var mainCategoriesList = [];
+var secondaryCategoriesList = [];
 
 function httpGetAsync(url, callback) {
   var xmlHttp = new XMLHttpRequest();
@@ -21,6 +25,15 @@ function httpGetAsync(url, callback) {
   xmlHttp.send(null);
 }
 
+function filterSecondaries(category) {
+
+  var sc = $("#secondaryCategory");
+  sc.empty();
+  secondaryCategoriesList.forEach(opt => {
+    if (opt.parentCategory === category) sc.append(new Option(opt.name, opt.name))
+  });
+};
+
 
 //Load data for main table
 Swal.fire({
@@ -28,6 +41,7 @@ Swal.fire({
 })
 swal.showLoading();
 
+//Load all items
 httpGetAsync(getAllItemsUrl, data => {
 
   data = JSON.parse(data);
@@ -38,6 +52,21 @@ httpGetAsync(getAllItemsUrl, data => {
   swal.close();
 });
 
+//Load category list and map to arrays
+httpGetAsync(getAllCategoriesUrl, data => {
+
+  var dataList = JSON.parse(data);
+  mainCategoriesList = dataList.filter(x => x.main === true);
+  secondaryCategoriesList = dataList.filter(x => x.main === false);
+
+});
+
+document.getElementById("mainCategory").addEventListener("change", x => {
+
+  var element = document.getElementById("mainCategory");
+  filterSecondaries(element.value);
+
+});
 
 document.getElementById("entryDate").value = new Date(Date.now()).toLocaleDateString();
 
@@ -54,22 +83,7 @@ document.getElementById("btnSave").addEventListener("click", x => {
     entryDate: document.getElementById("entryDate").value,
     locked: document.getElementById("locked").checked
   }
-
-  // Swal.fire({
-  //   type: 'success',
-  //   title: 'Pooh!',
-  //   text: 'Item guardat a la base de dades!',
-  // });
-
-  // Swal.fire({
-  //   type: 'error',
-  //   title: 'Ups!',
-  //   text: 'Error: {errorVariablePlaceholder}',
-  // })
-  //TODO: Post item to firebase!
-
   console.log(saveItemObject);
-
 });
 
 
@@ -110,10 +124,21 @@ $('#itemsTable tbody').on('click', 'button', function () {
 
     var itemDetails = JSON.parse(data);
 
+    var mc = $("#mainCategory");
+    var sc = $("#secondaryCategory");
+
+    mc.empty();
+    sc.empty();
+
+    mainCategoriesList.forEach(opt => { mc.append(new Option(opt.name, opt.name)) });
+    secondaryCategoriesList.forEach(opt => { sc.append(new Option(opt.name, opt.name)) });
+
+    mc.val(itemDetails.mainCategory).change();
+    sc.val(itemDetails.secondaryCategory).change();
+
     document.getElementById("name").value = itemDetails.name;
     document.getElementById("description").value = itemDetails.description;
-    //mainCategory: mc.options[mc.options.selectedIndex].value,
-    //secondaryCategory: sc.options[sc.options.selectedIndex].value,
+
     document.getElementById("entryDate").value = itemDetails.entryDate;
     document.getElementById("locked").checked = itemDetails.locked;
 
