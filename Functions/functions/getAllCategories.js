@@ -14,6 +14,7 @@ exports.handler = function (req, res, database) {
         description: x.data().description,
         locked: x.data().locked,
         parentCategory: x.data().parentCategory,
+		main: x.data().main
       };
 
       resArray.push(item);
