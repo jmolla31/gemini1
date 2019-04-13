@@ -1,4 +1,5 @@
 const getAllCategoriesUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/getAllCategories";
+const getCategoryDetailsUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/getCategoryDetails";
 
 function httpGetAsync(url, callback) {
   var xmlHttp = new XMLHttpRequest();
@@ -18,7 +19,20 @@ function httpGetAsync(url, callback) {
   }
   xmlHttp.open("GET", url, true); // true for asynchronous 
   xmlHttp.send(null);
-}
+};
+
+//Load data for main table
+Swal.fire({
+  title: 'Carregant...'
+})
+swal.showLoading();
+
+httpGetAsync(getAllCategoriesUrl, data => {
+  data = JSON.parse(data);
+  this.dataTable.rows.add(data).draw();
+  swal.close();
+});
+
 
 document.getElementById("entryDate").value = new Date(Date.now()).toLocaleDateString();
 
@@ -37,22 +51,6 @@ document.getElementById("btnSave").addEventListener("click", x => {
     entryDate: document.getElementById("entryDate").value,
     locked: document.getElementById("locked").checked
   }
-
-  // Swal.fire({
-  //   type: 'success',
-  //   title: 'Pooh!',
-  //   text: 'Item guardat a la base de dades!',
-  // });
-
-  // Swal.fire({
-  //   type: 'error',
-  //   title: 'Ups!',
-  //   text: 'Error: {errorVariablePlaceholder}',
-  // })
-  //TODO: Post item to firebase!
-
-  console.log(itemObject);
-
 });
 
 
@@ -72,12 +70,47 @@ var dataTable = $('#categoriesTable').DataTable({
   ]
 });
 
-httpGetAsync(getAllCategoriesUrl, data => {
 
-  data = JSON.parse(data);
-  console.log(data);
 
-  this.dataTable.rows.add(data).draw();
+$('#categoriesTable tbody').on('click', 'button', function () {
+  var data = dataTable.row($(this).parents('tr')).data();
+
+  Swal.fire({
+    title: 'Carregant...'
+  })
+  swal.showLoading();
+
+  var requestUrl = getCategoryDetailsUrl + '?docId=' + data.id
+
+  httpGetAsync(requestUrl, data => {
+
+    var itemDetails = JSON.parse(data);
+
+    debugger;
+
+    var mc = $("#mainCategory");
+    var sc = $("#secondaryCategory");
+
+    mc.empty();
+    sc.empty();
+
+    mainCategoriesList.forEach(opt => { mc.append(new Option(opt.name, opt.name)) });
+    secondaryCategoriesList.forEach(opt => { sc.append(new Option(opt.name, opt.name)) });
+
+    mc.val(itemDetails.mainCategory).change();
+    sc.val(itemDetails.secondaryCategory).change();
+
+    document.getElementById("name").value = itemDetails.name;
+    document.getElementById("description").value = itemDetails.description;
+
+    document.getElementById("entryDate").value = itemDetails.entryDate;
+    document.getElementById("locked").checked = itemDetails.locked;
+
+    swal.close();
+
+    $('#new-item-modal').modal();
+  })
 });
+
 
 

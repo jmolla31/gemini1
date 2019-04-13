@@ -43,12 +43,8 @@ swal.showLoading();
 
 //Load all items
 httpGetAsync(getAllItemsUrl, data => {
-
   data = JSON.parse(data);
-  console.log(data);
-
   this.dataTable.rows.add(data).draw();
-
   swal.close();
 });
 
