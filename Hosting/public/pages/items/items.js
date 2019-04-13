@@ -64,6 +64,26 @@ document.getElementById("mainCategory").addEventListener("change", x => {
 
 });
 
+document.getElementById("addItem").addEventListener("click", x => {
+  //Hide create button, show save changes and set appropiate title to modal
+  document.getElementById("btnCreate").hidden = false;
+  document.getElementById("btnSave").hidden = true;
+  document.getElementById("modal_title").innerText = "Crear nou item"
+
+  var mc = $("#mainCategory");
+  var sc = $("#secondaryCategory");
+  mc.empty();
+  sc.empty();
+  mainCategoriesList.forEach(opt => { mc.append(new Option(opt.name, opt.name)) });
+  secondaryCategoriesList.forEach(opt => { sc.append(new Option(opt.name, opt.name)) });
+
+
+  document.getElementById("name").value = '';
+  document.getElementById("description").value = '';
+  document.getElementById("entryDate").value = new Date(Date.now()).toLocaleDateString();;
+  document.getElementById("locked").checked = false;
+});
+
 document.getElementById("entryDate").value = new Date(Date.now()).toLocaleDateString();
 
 document.getElementById("btnSave").addEventListener("click", x => {
@@ -117,6 +137,11 @@ $('#itemsTable tbody').on('click', 'button', function () {
   var requestUrl = getItemDetails + '?docId=' + data.id
 
   httpGetAsync(requestUrl, data => {
+
+    //Hide create button, show save changes and set appropiate title to modal
+    document.getElementById("btnCreate").hidden = true;
+    document.getElementById("btnSave").hidden = false;
+    document.getElementById("modal_title").innerText = "Editar item";
 
     var itemDetails = JSON.parse(data);
 
