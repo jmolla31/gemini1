@@ -27,11 +27,20 @@ function httpGetAsync(url, callback) {
 
 function filterSecondaries(category) {
 
+  var empty = true;
+
   var sc = $("#secondaryCategory");
   sc.empty();
   secondaryCategoriesList.forEach(opt => {
-    if (opt.parentCategory === category) sc.append(new Option(opt.name, opt.name))
+    if (opt.parentCategory === category) {
+      sc.append(new Option(opt.name, opt.name));
+      empty = false;
+    }
   });
+
+  debugger;
+
+  if (empty) sc.append(new Option("--", "--"));
 };
 
 
@@ -95,7 +104,7 @@ document.getElementById("btnSave").addEventListener("click", x => {
     name: document.getElementById("name").value,
     description: document.getElementById("description").value,
     mainCategory: mc.options[mc.options.selectedIndex].value,
-    secondaryCategory: sc.options[sc.options.selectedIndex].value,
+    secondaryCategory: (sc.options[sc.options.selectedIndex].value === undefined) ? sc.options[sc.options.selectedIndex].value : "",
     entryDate: document.getElementById("entryDate").value,
     locked: document.getElementById("locked").checked
   }
