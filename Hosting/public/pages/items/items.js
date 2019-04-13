@@ -1,6 +1,7 @@
 const getAllItemsUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/getAllItems";
 const getItemDetails = "https://us-central1-gemini1-48753.cloudfunctions.net/getItemDetails";
 const getAllCategoriesUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/getAllCategories";
+const postItemUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/postItem";
 
 var mainCategoriesList = [];
 var secondaryCategoriesList = [];
@@ -25,10 +26,29 @@ function httpGetAsync(url, callback) {
   xmlHttp.send(null);
 }
 
+function httpPostAsync(url, data, callback) {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.onreadystatechange = function () {
+    if (xmlHttp.readyState === 4) {
+      if (xmlHttp.status === 200) {
+        callback(xmlHttp.responseText);
+      }
+      else {
+        Swal.fire({
+          type: 'error',
+          title: 'Ups!',
+          text: 'Error, catapluf!.',
+        })
+      }
+    }
+  }
+  xmlHttp.open("POST", url, true); // true for asynchronous 
+  xmlHttp.setRequestHeader('Content-Type', 'application/json');
+  xmlHttp.send(data);
+}
+
 function filterSecondaries(category) {
-
   var empty = true;
-
   var sc = $("#secondaryCategory");
   sc.empty();
   secondaryCategoriesList.forEach(opt => {
@@ -37,9 +57,6 @@ function filterSecondaries(category) {
       empty = false;
     }
   });
-
-  debugger;
-
   if (empty) sc.append(new Option("--", "--"));
 };
 
@@ -109,6 +126,41 @@ document.getElementById("btnSave").addEventListener("click", x => {
     locked: document.getElementById("locked").checked
   }
   console.log(saveItemObject);
+});
+
+
+document.getElementById("btnCreate").addEventListener("click", x => {
+
+  var mc = document.getElementById("mainCategory");
+  var sc = document.getElementById("secondaryCategory");
+
+  var saveItemObject = {
+    name: document.getElementById("name").value,
+    description: document.getElementById("description").value,
+    mainCategory: mc.options[mc.options.selectedIndex].value,
+    secondaryCategory: sc.options[sc.options.selectedIndex].value,
+    entryDate: document.getElementById("entryDate").value,
+    locked: document.getElementById("locked").checked
+  }
+  var jsonString = JSON.stringify(saveItemObject);
+
+  debugger;
+
+  Swal.fire({
+    title: 'Creant nou item...'
+  })
+  swal.showLoading();
+
+  httpPostAsync(postItemUrl, saveItemObject, x => {
+
+    console.log("newdocument" + x);
+    Swal.fire(
+      'Pooh!',
+      'Item creat correctament',
+      'success'
+    );
+    $('#new-item-modal').modal('hide');
+  });
 });
 
 

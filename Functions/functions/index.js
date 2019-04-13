@@ -15,7 +15,7 @@ const getItemCount = require('./getItemCount');
 const getLastItemsCount = require('./getLastItemsCount');
 const getAllItems = require('./getAllItems');
 const getAllCategories = require('./getAllCategories');
-const addItem = require('./addItem');
+const postItem = require('./postItem');
 const getCategoryCount = require('./getCategoryCount');
 const getItemDetails = require('./getItemDetails');
 const getCategoryDetails = require('./getCategoryDetails');
@@ -28,4 +28,5 @@ exports.getLastItemsCount = functions.https.onRequest((req, res) => { getLastIte
 exports.getAllItems = functions.https.onRequest((req, res) => { getAllItems.handler(req, res, db); });
 exports.getAllCategories = functions.https.onRequest((req, res) => { getAllCategories.handler(req, res, db); });
 exports.getCategoryDetails = functions.https.onRequest((req, res) => { getCategoryDetails.handler(req, res, db); });
+exports.postItem = functions.https.onRequest((req, res) => { postItem.handler(req, res, db, cors); });
 
