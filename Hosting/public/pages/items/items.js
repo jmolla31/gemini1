@@ -43,8 +43,8 @@ function httpPostAsync(url, data, callback) {
     }
   }
   xmlHttp.open("POST", url, true); // true for asynchronous 
-  xmlHttp.setRequestHeader('Content-Type', 'application/json');
-  xmlHttp.send(data);
+  xmlHttp.setRequestHeader("Content-Type", "application/json");
+  xmlHttp.send(JSON.stringify(data));
 }
 
 function filterSecondaries(category) {
@@ -142,9 +142,6 @@ document.getElementById("btnCreate").addEventListener("click", x => {
     entryDate: document.getElementById("entryDate").value,
     locked: document.getElementById("locked").checked
   }
-  var jsonString = JSON.stringify(saveItemObject);
-
-  debugger;
 
   Swal.fire({
     title: 'Creant nou item...'
