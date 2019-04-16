@@ -1,6 +1,3 @@
-const getAllCategoriesUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/getAllCategories";
-const getCategoryDetailsUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/getCategoryDetails";
-
 //Load data for main table
 Swal.fire({
   title: 'Carregant...'
