@@ -1,7 +1,8 @@
 const getAllItemsUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/getAllItems";
 const getItemDetails = "https://us-central1-gemini1-48753.cloudfunctions.net/getItemDetails";
 const getAllCategoriesUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/getAllCategories";
-const addItemUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/postItem";
+const addItemUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/addItem";
+const updateItemUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/updateItem";
 
 
 
@@ -42,6 +43,27 @@ function httpGetAsync(url, callback) {
       }
     }
     xmlHttp.open("POST", url, true); // true for asynchronous 
+    xmlHttp.setRequestHeader("Content-Type", "application/json");
+    xmlHttp.send(JSON.stringify(data));
+  }
+
+  function httpPutAsync(url, data, callback) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function () {
+      if (xmlHttp.readyState === 4) {
+        if (xmlHttp.status === 200) {
+          callback(xmlHttp.responseText);
+        }
+        else {
+          Swal.fire({
+            type: 'error',
+            title: 'Ups!',
+            text: 'Error, catapluf!.',
+          })
+        }
+      }
+    }
+    xmlHttp.open("PUT", url, true); // true for asynchronous 
     xmlHttp.setRequestHeader("Content-Type", "application/json");
     xmlHttp.send(JSON.stringify(data));
   }
