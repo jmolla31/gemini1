@@ -103,7 +103,7 @@ document.getElementById("btnCreate").addEventListener("click", x => {
   })
   swal.showLoading();
 
-  httpPostAsync(postItemUrl, saveItemObject, x => {
+  httpPostAsync(addItemUrl, saveItemObject, x => {
 
     console.log("newdocument" + x);
     Swal.fire(

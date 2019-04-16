@@ -1,7 +1,7 @@
 const getAllItemsUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/getAllItems";
 const getItemDetails = "https://us-central1-gemini1-48753.cloudfunctions.net/getItemDetails";
 const getAllCategoriesUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/getAllCategories";
-const postItemUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/postItem";
+const addItemUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/postItem";
 
 
 
