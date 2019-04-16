@@ -3,6 +3,7 @@ const getItemDetails = "https://us-central1-gemini1-48753.cloudfunctions.net/get
 const getAllCategoriesUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/getAllCategories";
 const addItemUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/addItem";
 const updateItemUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/updateItem";
+const getCategoryDetailsUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/getCategoryDetails";
 
 
 

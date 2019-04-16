@@ -1,26 +1,6 @@
 const getAllCategoriesUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/getAllCategories";
 const getCategoryDetailsUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/getCategoryDetails";
 
-function httpGetAsync(url, callback) {
-  var xmlHttp = new XMLHttpRequest();
-  xmlHttp.onreadystatechange = function () {
-    if (xmlHttp.readyState === 4) {
-      if (xmlHttp.status === 200) {
-        callback(xmlHttp.responseText);
-      }
-      else {
-        Swal.fire({
-          type: 'error',
-          title: 'Ups!',
-          text: 'Error, no es pot conectar al servei de dades.',
-        })
-      }
-    }
-  }
-  xmlHttp.open("GET", url, true); // true for asynchronous 
-  xmlHttp.send(null);
-};
-
 //Load data for main table
 Swal.fire({
   title: 'Carregant...'
