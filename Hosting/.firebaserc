@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "gemini1-48753"
+    "default": "gemini1-48753",
+    "prod": "gemini-suamo"
   }
 }
