@@ -11,14 +11,15 @@ admin.firestore().settings({ timestampsInSnapshots: true });
 var db = admin.firestore();
 
 //Import all functions
-const getItemCount = require('./getItemCount');
-const getLastItemsCount = require('./getLastItemsCount');
-const getAllItems = require('./getAllItems');
-const getAllCategories = require('./getAllCategories');
-const addItem = require('./addItem');
-const getCategoryCount = require('./getCategoryCount');
-const getItemDetails = require('./getItemDetails');
-const getCategoryDetails = require('./getCategoryDetails');
+const getItemCount = require('./Items/getItemCount');
+const getLastItemsCount = require('./Items/getLastItemsCount');
+const getAllItems = require('./Items/getAllItems');
+const addItem = require('./Items/addItem');
+const getItemDetails = require('./Items/getItemDetails');
+
+const getAllCategories = require('./Categories/getAllCategories');
+const getCategoryCount = require('./Categories/getCategoryCount');
+const getCategoryDetails = require('./Categories/getCategoryDetails');
 
 
 exports.getItemDetails = functions.https.onRequest((req, res) => { getItemDetails.handler(req, res, db, cors); });
