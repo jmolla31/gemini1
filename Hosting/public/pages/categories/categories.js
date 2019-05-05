@@ -23,7 +23,6 @@ var dataTable = $('#categoriesTable').DataTable({
   "ordering": false,
   "info": false,
   "columns": [
-    { "data": "id" },
     { "data": "name" },
     { "data": "description" },
     { "data": "parentCategory" },
