@@ -21,13 +21,6 @@
 <body>
   <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Suamo - Gemini</a>
-    <input class="form-control form-control-dark w-100" id="searchtext" type="text" placeholder="Buscar codi"
-      aria-label="Buscar codi">
-    <ul class="navbar-nav px-3">
-      <li class="nav-item text-nowrap">
-        <a class="nav-link" id="search" href="#">Buscar</a>
-      </li>
-    </ul>
     <ul class="navbar-nav px-3">
       <li class="nav-item text-nowrap">
         <a class="nav-link" href="#">Eixir</a>
@@ -65,7 +58,8 @@
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
           <h2 class="h2">Llista categories</h1>
-            <button type="button" class="btn btn-primary" id="addCategory" data-toggle="modal-title" data-target=".new-item-modal">Afegir
+            <button type="button" class="btn btn-primary" id="addCategory" data-toggle="modal-title"
+              data-target=".new-item-modal">Afegir
               Categoria</button>
         </div>
         <div class="table-responsive">
@@ -87,8 +81,8 @@
 
   </div>
 
-  <div class="modal fade category-modal" id="category-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-    aria-hidden="true">
+  <div class="modal fade category-modal" id="category-modal" tabindex="-1" role="dialog"
+    aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -118,13 +112,13 @@
             </div>
             <div class="form-group">
               <label for="parentCategory">Categoria superior</label>
-                  <select class="form-control" id="parentCategory">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </select>
+              <select class="form-control" id="parentCategory">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
             </div>
           </form>
         </div>
