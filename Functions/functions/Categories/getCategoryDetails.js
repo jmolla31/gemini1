@@ -9,15 +9,15 @@ exports.handler = function (req, res, database) {
 
 
   database.doc('categories/' + docId).get().then(x => {
-	
-	var item = {
-        id: x.id,
-        name: x.data().name,
-        description: x.data().description,
-        locked: x.data().locked,
-        parentCategory: x.data().parentCategory,
-		main: x.data().main
-	};
+
+    var item = {
+      id: x.id,
+      name: x.data().name,
+      description: x.data().description,
+      locked: x.data().locked,
+      parentCategory: x.data().parentCategory,
+      main: x.data().main
+    };
 
     res.status(200).send(JSON.stringify(item));
   },

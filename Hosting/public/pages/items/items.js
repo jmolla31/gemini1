@@ -61,7 +61,7 @@ document.getElementById("addItem").addEventListener("click", x => {
 
   document.getElementById("name").value = '';
   document.getElementById("description").value = '';
-  document.getElementById("entryDate").value = new Date(Date.now()).toLocaleDateString();;
+  document.getElementById("entryDate").value = new Date(Date.now()).toLocaleDateString();
   document.getElementById("locked").checked = false;
 });
 
@@ -135,7 +135,14 @@ var dataTable = $('#itemsTable').DataTable({
       "data": null,
       "defaultContent": "<button>Editar</button>"
     }
-  ]
+  ],
+  "language": {
+    "paginate": {
+      "previous": "<--",
+      "next": "-->"
+    },
+    "search" : "Buscar"
+  }
 });
 
 
@@ -148,6 +155,8 @@ $('#itemsTable tbody').on('click', 'button', function () {
   swal.showLoading();
 
   var requestUrl = getItemDetails + '?docId=' + data.id
+
+  document.getElementById("itemId").value = data.id;
 
   httpGetAsync(requestUrl, data => {
 

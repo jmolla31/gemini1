@@ -1,34 +1,21 @@
+var parentCategoryList = [];
+
+
+function filterParents(category) {
+  var pc = $("#parentCategory");
+  pc.empty();
+  parentCategoryList.forEach(x => {
+    if (x.main === true && x.name != category.name) {
+      pc.append(new Option(x.name, x.name));
+    }
+  });
+};
+
 //Load data for main table
 Swal.fire({
   title: 'Carregant...'
 })
 swal.showLoading();
-
-httpGetAsync(getAllCategoriesUrl, data => {
-  data = JSON.parse(data);
-  this.dataTable.rows.add(data).draw();
-  swal.close();
-});
-
-
-document.getElementById("entryDate").value = new Date(Date.now()).toLocaleDateString();
-
-document.getElementById("btnSave").addEventListener("click", x => {
-
-  console.log("duh!");
-
-  var mc = document.getElementById("mainCategory");
-  var sc = document.getElementById("secondaryCategory");
-
-  var itemObject = {
-    name: document.getElementById("name").value,
-    description: document.getElementById("description").value,
-    mainCategory: mc.options[mc.options.selectedIndex].value,
-    secondaryCategory: sc.options[sc.options.selectedIndex].value,
-    entryDate: document.getElementById("entryDate").value,
-    locked: document.getElementById("locked").checked
-  }
-});
 
 
 var dataTable = $('#categoriesTable').DataTable({
@@ -44,13 +31,106 @@ var dataTable = $('#categoriesTable').DataTable({
       "data": null,
       "defaultContent": "<button>Editar</button>"
     }
-  ]
+  ],
+  "language": {
+    "paginate": {
+      "previous": "<--",
+      "next": "-->"
+    },
+    "search" : "Buscar"
+  }
 });
 
+
+httpGetAsync(getAllCategoriesUrl, data => {
+  data = JSON.parse(data);
+  parentCategoryList = data;
+  this.dataTable.rows.add(data).draw();
+  swal.close();
+});
+
+document.getElementById('main').addEventListener('change', (event) => {
+
+  if (event.target.checked) {
+    document.getElementById("parentCategory").disabled = true;
+  } else {
+    document.getElementById("parentCategory").disabled = false;
+  }
+})
+
+document.getElementById("btnSave").addEventListener("click", x => {
+
+  var pc = document.getElementById("parentCategory");
+
+  var categoryObject = {
+    name: document.getElementById("name").value,
+    description: document.getElementById("description").value,
+    parentCategory: pc.options[pc.options.selectedIndex].value,
+    main: document.getElementById("main").checked,
+    locked: false
+  }
+
+  if (categoryObject.main) categoryObject.parentCategory = "--";
+});
+
+
+document.getElementById("btnCreate").addEventListener("click", x => {
+
+  debugger;
+
+  var pc = document.getElementById("parentCategory");
+
+  var categoryObject = {
+    name: document.getElementById("name").value,
+    description: document.getElementById("description").value,
+    parentCategory: pc.options[pc.options.selectedIndex].value,
+    main: document.getElementById("main").checked,
+    locked: false
+  }
+
+  if (categoryObject.main) categoryObject.parentCategory = "--";
+
+  Swal.fire({
+    title: 'Creant nova categeoria...'
+  })
+  swal.showLoading();
+
+  httpPostAsync(addCategoryUrl, saveItemObject, x => {
+
+    console.log("newdocument" + x);
+    Swal.fire(
+      'Pooh!',
+      'Item creat correctament',
+      'success'
+    ).then(x => { setTimeout(function(){ location.reload(); }, 2000);})
+    $('#new-item-modal').modal('hide');
+  });
+});
+
+
+document.getElementById("addCategory").addEventListener("click", x => {
+
+  filterParents("DUH");
+
+  document.getElementById("btnCreate").hidden = false;
+  document.getElementById("btnSave").hidden = true;
+  document.getElementById("modal-title").innerText = "Afegir categoria"
+
+  document.getElementById("name").value = '';
+  document.getElementById("description").value = '';
+  document.getElementById("main").checked = false;
+  document.getElementById("parentCategory").disabled = false;
+
+  $('#category-modal').modal();
+});
 
 
 $('#categoriesTable tbody').on('click', 'button', function () {
   var data = dataTable.row($(this).parents('tr')).data();
+
+  document.getElementById("btnCreate").hidden = true;
+  document.getElementById("btnSave").hidden = false;
+  document.getElementById("modal-title").innerText = "Editar categoria"
 
   Swal.fire({
     title: 'Carregant...'
@@ -59,33 +139,29 @@ $('#categoriesTable tbody').on('click', 'button', function () {
 
   var requestUrl = getCategoryDetailsUrl + '?docId=' + data.id
 
+  document.getElementById("categoryId").value = data.id;
+
   httpGetAsync(requestUrl, data => {
 
-    var itemDetails = JSON.parse(data);
+    var categoryDetails = JSON.parse(data);
 
-    debugger;
+    if (categoryDetails.main === true) {
+      document.getElementById("parentCategory").disabled = true;
+    }
+    else {
+      document.getElementById("parentCategory").disabled = false;
+    }
 
-    var mc = $("#mainCategory");
-    var sc = $("#secondaryCategory");
 
-    mc.empty();
-    sc.empty();
+    filterParents(categoryDetails.name);
 
-    mainCategoriesList.forEach(opt => { mc.append(new Option(opt.name, opt.name)) });
-    secondaryCategoriesList.forEach(opt => { sc.append(new Option(opt.name, opt.name)) });
-
-    mc.val(itemDetails.mainCategory).change();
-    sc.val(itemDetails.secondaryCategory).change();
-
-    document.getElementById("name").value = itemDetails.name;
-    document.getElementById("description").value = itemDetails.description;
-
-    document.getElementById("entryDate").value = itemDetails.entryDate;
-    document.getElementById("locked").checked = itemDetails.locked;
+    document.getElementById("name").value = categoryDetails.name;
+    document.getElementById("description").value = categoryDetails.description;
+    document.getElementById("main").checked = categoryDetails.main;
 
     swal.close();
 
-    $('#new-item-modal').modal();
+    $('#category-modal').modal();
   })
 });
 
