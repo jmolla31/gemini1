@@ -21,8 +21,7 @@ httpGetAsync(getAllItemsUrl, data => {
 
   data = JSON.parse(data);
 
-  console.log(data);
-
+  data.length = 10;
 
   var tableRef = document.getElementById('itemsTable').getElementsByTagName('tbody')[0];
 
