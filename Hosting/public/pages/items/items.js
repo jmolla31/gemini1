@@ -89,7 +89,7 @@ document.getElementById("btnSave").addEventListener("click", x => {
       'Item actualitzat correctament',
       'success'
     )
-  })<
+  })
 
 });
 
