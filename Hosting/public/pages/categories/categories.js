@@ -36,7 +36,7 @@ var dataTable = $('#categoriesTable').DataTable({
       "previous": "<--",
       "next": "-->"
     },
-    "search" : "Buscar"
+    "search": "Buscar"
   }
 });
 
@@ -62,6 +62,7 @@ document.getElementById("btnSave").addEventListener("click", x => {
   var pc = document.getElementById("parentCategory");
 
   var categoryObject = {
+    id: document.getElementById("categoryId").value,
     name: document.getElementById("name").value,
     description: document.getElementById("description").value,
     parentCategory: pc.options[pc.options.selectedIndex].value,
@@ -70,6 +71,14 @@ document.getElementById("btnSave").addEventListener("click", x => {
   }
 
   if (categoryObject.main) categoryObject.parentCategory = "--";
+
+  httpPutAsync(updateCategoryUrl, categoryObject, x => {
+    Swal.fire(
+      'Pooh!',
+      'Categoria actualitzada correctament',
+      'success'
+    )
+  });
 });
 
 
@@ -99,9 +108,9 @@ document.getElementById("btnCreate").addEventListener("click", x => {
     console.log("newdocument" + x);
     Swal.fire(
       'Pooh!',
-      'Item creat correctament',
+      'Categoria creada correctament',
       'success'
-    ).then(x => { setTimeout(function(){ location.reload(); }, 2000);})
+    ).then(x => { setTimeout(function () { location.reload(); }, 2000); })
     $('#new-item-modal').modal('hide');
   });
 });

@@ -72,7 +72,8 @@ document.getElementById("btnSave").addEventListener("click", x => {
   var mc = document.getElementById("mainCategory");
   var sc = document.getElementById("secondaryCategory");
 
-  var saveItemObject = {
+  var updateItemObject = {
+    id: document.getElementById("itemId"),
     name: document.getElementById("name").value,
     description: document.getElementById("description").value,
     mainCategory: mc.options[mc.options.selectedIndex].value,
@@ -81,6 +82,15 @@ document.getElementById("btnSave").addEventListener("click", x => {
     locked: document.getElementById("locked").checked
   }
   console.log(saveItemObject);
+
+  httpPutAsync(updateItemUrl, updateItemObject, x => {
+    Swal.fire(
+      'Pooh!',
+      'Item actualitzat correctament',
+      'success'
+    )
+  })<
+
 });
 
 
@@ -110,7 +120,7 @@ document.getElementById("btnCreate").addEventListener("click", x => {
       'Pooh!',
       'Item creat correctament',
       'success'
-    ).then(x => { setTimeout(function(){ location.reload(); }, 2000);})
+    ).then(x => { setTimeout(function () { location.reload(); }, 2000); })
     $('#new-item-modal').modal('hide');
   });
 });
@@ -141,7 +151,7 @@ var dataTable = $('#itemsTable').DataTable({
       "previous": "<--",
       "next": "-->"
     },
-    "search" : "Buscar"
+    "search": "Buscar"
   }
 });
 
