@@ -15,6 +15,45 @@ function filterSecondaries(category) {
   if (empty) sc.append(new Option("--", "--"));
 };
 
+function updateDatatableRows(firstStart) {
+  dataTable.clear().draw();
+  //Load all items
+  httpGetAsync(getAllItemsUrl, data => {
+    data = JSON.parse(data);
+    dataTable.rows.add(data).draw();
+    if (firstStart) swal.close();
+  });
+}
+
+var dataTable = $('#itemsTable').DataTable({
+  "bLengthChange": false,
+  "ordering": false,
+  "info": false,
+  "columns": [
+    {
+      "data": "id",
+      "visible": false
+    },
+    { "data": "name" },
+    { "data": "description" },
+    { "data": "mainCategory" },
+    { "data": "secondaryCategory" },
+    { "data": "entryDate" }
+    ,
+    {
+      "data": null,
+      "defaultContent": "<button>Editar</button>"
+    }
+  ],
+  "language": {
+    "paginate": {
+      "previous": "<--",
+      "next": "-->"
+    },
+    "search": "Buscar"
+  }
+});
+
 
 //Load data for main table
 Swal.fire({
@@ -22,12 +61,10 @@ Swal.fire({
 })
 swal.showLoading();
 
-//Load all items
-httpGetAsync(getAllItemsUrl, data => {
-  data = JSON.parse(data);
-  this.dataTable.rows.add(data).draw();
-  swal.close();
-});
+updateDatatableRows(true);
+
+
+
 
 //Load category list and map to arrays
 httpGetAsync(getAllCategoriesUrl, data => {
@@ -73,22 +110,28 @@ document.getElementById("btnSave").addEventListener("click", x => {
   var sc = document.getElementById("secondaryCategory");
 
   var updateItemObject = {
-    id: document.getElementById("itemId"),
+    id: document.getElementById("itemId").value,
     name: document.getElementById("name").value,
     description: document.getElementById("description").value,
     mainCategory: mc.options[mc.options.selectedIndex].value,
-    secondaryCategory: (sc.options[sc.options.selectedIndex].value === undefined) ? sc.options[sc.options.selectedIndex].value : "",
+    secondaryCategory: (sc.options[sc.options.selectedIndex] === undefined) ? "" : sc.options[sc.options.selectedIndex].value,
     entryDate: document.getElementById("entryDate").value,
     locked: document.getElementById("locked").checked
   }
-  console.log(saveItemObject);
+
+  Swal.fire({
+    title: 'Actualitzant item...'
+  })
+  swal.showLoading();
 
   httpPutAsync(updateItemUrl, updateItemObject, x => {
     Swal.fire(
       'Pooh!',
       'Item actualitzat correctament',
       'success'
-    )
+    );
+
+    this.updateDatatableRows(false);
   })
 
 });
@@ -120,40 +163,12 @@ document.getElementById("btnCreate").addEventListener("click", x => {
       'Pooh!',
       'Item creat correctament',
       'success'
-    ).then(x => { setTimeout(function () { location.reload(); }, 2000); })
+    );
+    updateDatatableRows(false);
     $('#new-item-modal').modal('hide');
   });
 });
 
-
-var dataTable = $('#itemsTable').DataTable({
-  "bLengthChange": false,
-  "ordering": false,
-  "info": false,
-  "columns": [
-    {
-      "data": "id",
-      "visible": false
-    },
-    { "data": "name" },
-    { "data": "description" },
-    { "data": "mainCategory" },
-    { "data": "secondaryCategory" },
-    { "data": "entryDate" }
-    ,
-    {
-      "data": null,
-      "defaultContent": "<button>Editar</button>"
-    }
-  ],
-  "language": {
-    "paginate": {
-      "previous": "<--",
-      "next": "-->"
-    },
-    "search": "Buscar"
-  }
-});
 
 
 $('#itemsTable tbody').on('click', 'button', function () {

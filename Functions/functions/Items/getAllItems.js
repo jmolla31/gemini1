@@ -2,7 +2,7 @@ exports.handler = function (req, res, database) {
 
   console.log("Function processed");
 
-  database.collection('items').get().then(query => {
+  database.collection('items').orderBy('entryDate', 'desc').get().then(query => {
 
     var resArray = [];
 
