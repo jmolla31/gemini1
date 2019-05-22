@@ -38,11 +38,10 @@ var dataTable = $('#itemsTable').DataTable({
     { "data": "description" },
     { "data": "mainCategory" },
     { "data": "secondaryCategory" },
-    { "data": "entryDate" }
-    ,
+    { "data": "entryDate" },
     {
       "data": null,
-      "defaultContent": "<button>Editar</button>"
+      "defaultContent": '<button type="button" class="btn btn-primary btnRowEdit">Editar</button> <button type="button" id="btnDelete" class="btn btn-danger btnRowDelete">Eliminar</button>'
     }
   ],
   "language": {
@@ -103,6 +102,13 @@ document.getElementById("addItem").addEventListener("click", x => {
 });
 
 document.getElementById("entryDate").value = new Date(Date.now()).toLocaleDateString();
+
+// document.getElementById("btnDelete").addEventListener("click", x=> {
+
+
+
+
+// })
 
 document.getElementById("btnSave").addEventListener("click", x => {
 
@@ -171,7 +177,7 @@ document.getElementById("btnCreate").addEventListener("click", x => {
 
 
 
-$('#itemsTable tbody').on('click', 'button', function () {
+$('#itemsTable tbody').on('click', 'button.btnRowEdit', function () {
   var data = dataTable.row($(this).parents('tr')).data();
 
   Swal.fire({
@@ -216,4 +222,30 @@ $('#itemsTable tbody').on('click', 'button', function () {
   })
 });
 
+
+
+$('#itemsTable tbody').on('click', 'button.btnRowDelete', function () {
+  var data = dataTable.row($(this).parents('tr')).data();
+
+  Swal.fire({
+    title: 'Borrar item?',
+    text: data.name,
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si!'
+  }).then(() => {
+    var requestUrl = getItemDetails + '?docId=' + data.id
+
+    httpDeleteAsync(deleteItemUrl, x => {
+      Swal.fire(
+        'Pooh!',
+        'Item borrat correctament.',
+        'success'
+      )
+      updateDatatableRows(false);
+    });
+  })
+});
 
