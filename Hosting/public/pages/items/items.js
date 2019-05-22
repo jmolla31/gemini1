@@ -236,9 +236,9 @@ $('#itemsTable tbody').on('click', 'button.btnRowDelete', function () {
     cancelButtonColor: '#d33',
     confirmButtonText: 'Si!'
   }).then(() => {
-    var requestUrl = getItemDetails + '?docId=' + data.id
+    var requestUrl = deleteItemUrl + '?docId=' + data.id
 
-    httpDeleteAsync(deleteItemUrl, x => {
+    httpDeleteAsync(requestUrl, x => {
       Swal.fire(
         'Pooh!',
         'Item borrat correctament.',

@@ -17,6 +17,7 @@ const getAllItems = require('./Items/getAllItems');
 const addItem = require('./Items/addItem');
 const getItemDetails = require('./Items/getItemDetails');
 const updateItem = require('./Items/updateItem');
+const deleteItem = require('./Items/deleteItem');
 
 const getAllCategories = require('./Categories/getAllCategories');
 const getCategoryCount = require('./Categories/getCategoryCount');
@@ -33,4 +34,5 @@ exports.getCategoryDetails = functions.https.onRequest((req, res) => { getCatego
 exports.addItem = functions.https.onRequest((req, res) => { addItem.handler(req, res, db); });
 exports.updateCategory = functions.https.onRequest((req, res) => { updateCategory.handler(req, res, db); });
 exports.updateItem = functions.https.onRequest((req, res) => { updateItem.handler(req, res, db); });
+exports.deleteItem = functions.https.onRequest((req, res) => { deleteItem.handler(req, res, db); });
 
