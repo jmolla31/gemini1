@@ -11,6 +11,18 @@ function filterParents(category) {
   });
 };
 
+
+
+function updateDatatableRows(firstStart) {
+  dataTable.clear().draw();
+  //Load all items
+  httpGetAsync(getAllCategoriesUrl, data => {
+    data = JSON.parse(data);
+    dataTable.rows.add(data).draw();
+    if (firstStart) swal.close();
+  });
+}
+
 //Load data for main table
 Swal.fire({
   title: 'Carregant...'
@@ -28,7 +40,7 @@ var dataTable = $('#categoriesTable').DataTable({
     { "data": "parentCategory" },
     {
       "data": null,
-      "defaultContent": "<button>Editar</button>"
+      "defaultContent": '<button type="button" class="btn btn-primary btnRowEdit">Editar</button> <button type="button" id="btnDelete" class="btn btn-danger btnRowDelete">Eliminar</button>'
     }
   ],
   "language": {
@@ -72,19 +84,25 @@ document.getElementById("btnSave").addEventListener("click", x => {
 
   if (categoryObject.main) categoryObject.parentCategory = "--";
 
+
+  Swal.fire({
+    title: 'Actualitzant categoria...'
+  })
+  swal.showLoading();
+
+
   httpPutAsync(updateCategoryUrl, categoryObject, x => {
     Swal.fire(
       'Pooh!',
       'Categoria actualitzada correctament',
       'success'
     )
+    this.updateDatatableRows(false);
   });
 });
 
 
 document.getElementById("btnCreate").addEventListener("click", x => {
-
-  debugger;
 
   var pc = document.getElementById("parentCategory");
 
@@ -99,19 +117,20 @@ document.getElementById("btnCreate").addEventListener("click", x => {
   if (categoryObject.main) categoryObject.parentCategory = "--";
 
   Swal.fire({
-    title: 'Creant nova categeoria...'
+    title: 'Creant nova categoria...'
   })
   swal.showLoading();
 
-  httpPostAsync(addCategoryUrl, saveItemObject, x => {
+  httpPostAsync(addCategoryUrl, categoryObject, x => {
 
     console.log("newdocument" + x);
     Swal.fire(
       'Pooh!',
       'Categoria creada correctament',
       'success'
-    ).then(x => { setTimeout(function () { location.reload(); }, 2000); })
-    $('#new-item-modal').modal('hide');
+    );
+    updateDatatableRows(false);
+    $('#category-modal').modal('hide');
   });
 });
 
@@ -133,7 +152,7 @@ document.getElementById("addCategory").addEventListener("click", x => {
 });
 
 
-$('#categoriesTable tbody').on('click', 'button', function () {
+$('#categoriesTable tbody').on('click', 'button.btnRowEdit', function () {
   var data = dataTable.row($(this).parents('tr')).data();
 
   document.getElementById("btnCreate").hidden = true;
@@ -173,5 +192,35 @@ $('#categoriesTable tbody').on('click', 'button', function () {
   })
 });
 
+
+$('#categoriesTable tbody').on('click', 'button.btnRowDelete', function () {
+  var data = dataTable.row($(this).parents('tr')).data();
+
+  Swal.fire({
+    title: 'Borrar categoria?',
+    text: data.name,
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si!'
+  }).then(() => {
+    var requestUrl = deleteCategoryUrl + '?docId=' + data.id
+
+    Swal.fire({
+      title: 'Eliminant categoria...'
+    })
+    swal.showLoading();
+
+    httpDeleteAsync(requestUrl, x => {
+      Swal.fire(
+        'Pooh!',
+        'Categoria borrada correctament.',
+        'success'
+      )
+      updateDatatableRows(false);
+    });
+  })
+});
 
 

@@ -6,7 +6,8 @@ const updateItemUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/upda
 const deleteItemUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/deleteItem";
 const getCategoryDetailsUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/getCategoryDetails";
 const addCategoryUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/addCategory";
-const updateCategoryUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/addCategory";
+const updateCategoryUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/updateCategory";
+const deleteCategoryUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/deleteCategory";
 
 
 

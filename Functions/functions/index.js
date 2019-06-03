@@ -20,9 +20,11 @@ const updateItem = require('./Items/updateItem');
 const deleteItem = require('./Items/deleteItem');
 
 const getAllCategories = require('./Categories/getAllCategories');
+const addCategory = require('./Categories/addCategory');
 const getCategoryCount = require('./Categories/getCategoryCount');
 const getCategoryDetails = require('./Categories/getCategoryDetails');
 const updateCategory = require('./Categories/updateCategory');
+const deleteCategory = require('./Categories/deleteCategory');
 
 exports.getItemDetails = functions.https.onRequest((req, res) => { getItemDetails.handler(req, res, db, cors); });
 exports.getItemCount = functions.https.onRequest((req, res) => { getItemCount.handler(req, res, db, cors); });
@@ -32,7 +34,8 @@ exports.getAllItems = functions.https.onRequest((req, res) => { getAllItems.hand
 exports.getAllCategories = functions.https.onRequest((req, res) => { getAllCategories.handler(req, res, db); });
 exports.getCategoryDetails = functions.https.onRequest((req, res) => { getCategoryDetails.handler(req, res, db); });
 exports.addItem = functions.https.onRequest((req, res) => { addItem.handler(req, res, db); });
+exports.addCategory = functions.https.onRequest((req, res) => { addCategory.handler(req, res, db); });
 exports.updateCategory = functions.https.onRequest((req, res) => { updateCategory.handler(req, res, db); });
 exports.updateItem = functions.https.onRequest((req, res) => { updateItem.handler(req, res, db); });
 exports.deleteItem = functions.https.onRequest((req, res) => { deleteItem.handler(req, res, db); });
-
+exports.deleteCategory = functions.https.onRequest((req, res) => { deleteCategory.handler(req, res, db); });
