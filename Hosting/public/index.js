@@ -4,9 +4,6 @@ const getCategoryCount = "https://us-central1-gemini1-48753.cloudfunctions.net/g
 const getLoanCount = "https://us-central1-gemini1-48753.cloudfunctions.net/getLoanCount";
 const getTicketCount = "https://us-central1-gemini1-48753.cloudfunctions.net/getTicketCount";
 
-//const Swal = require('sweetalert2');
-
-
 function httpGetAsync(url, callback) {
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.onreadystatechange = function () {

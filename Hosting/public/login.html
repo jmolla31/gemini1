@@ -21,9 +21,7 @@
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Suamo - Gemini</a>
     <ul class="navbar-nav px-3">
       <li class="nav-item text-nowrap">
-        <a class="nav-link" id="btnSignOut" href="#">Eixir</a>
       </li>
-      
     </ul>
   </nav>
 
@@ -56,54 +54,12 @@
 
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 class="h2">Dashboard</h1>
-        </div>
-        <div class="card-deck">
-          <div class="card text-white bg-info">
-            <div class="card-body">
-              <h5 class="card-title">Total ítems</h5>
-              <h1 class="card-text" id="totalitems">--</h1>
-            </div>
-          </div>
-          <div class="card text-white bg-primary">
-            <div class="card-body">
-              <h5 class="card-title">Total categories</h5>
-              <h1 class="card-text" id="totalcategories">--</h1>
-            </div>
-          </div>
-          <div class="card text-white bg-warning">
-            <div class="card-body">
-              <h5 class="card-title">Préstecs oberts</h5>
-              <h1 class="card-text">--</h1>
-            </div>
-          </div>
-          <div class="card text-white bg-danger">
-            <div class="card-body">
-              <h5 class="card-title">Incidencies obertes</h5>
-              <h1 class="card-text">--</h1>
-            </div>
-          </div>
+          <h1 class="h2">Login</h1>
         </div>
 
-        </br>
+        <div id="firebaseui-auth-container"></div>
+        <div id="loader">Loading...</div>
 
-        <h2>Últims ítems afegits</h2>
-        <div class="table-responsive">
-          <table class="table table-striped table-sm" id="itemsTable">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Nom</th>
-                <th>Descripció</th>
-                <th>C. Principal</th>
-                <th>C. Secundària</th>
-                <th>Data entrada</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-        </div>
       </main>
     </div>
   </div>
@@ -129,9 +85,7 @@
   <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 
-  <script src="index.js"></script>
-  <script src="./resources/auth.js"></script>
-
+  <script src="login.js"></script>
   <script>
     feather.replace()
   </script>
