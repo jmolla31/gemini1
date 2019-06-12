@@ -1,4 +1,4 @@
-exports.handler = function (req, res, database) {
+exports.handler = function (res, database) {
 
     database.collection('activitiees').get().then(query => {
   
@@ -10,7 +10,6 @@ exports.handler = function (req, res, database) {
           id: x.id,
           name: x.data().name,
           type: x.data().type,
-          description: x.data().description,
           date: x.data().date,
         };
   
@@ -22,5 +21,4 @@ exports.handler = function (req, res, database) {
       res.status(200).send(resArray);
   
     });
-  
   }
