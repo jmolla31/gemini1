@@ -1,17 +1,6 @@
 var parentCategoryList = [];
 
 
-function filterParents(category) {
-  var pc = $("#parentCategory");
-  pc.empty();
-  parentCategoryList.forEach(x => {
-    if (x.main === true && x.name != category.name) {
-      pc.append(new Option(x.name, x.name));
-    }
-  });
-};
-
-
 
 function updateDatatableRows(firstStart) {
   dataTable.clear().draw();
@@ -60,14 +49,6 @@ httpGetAsync(getAllCategoriesUrl, data => {
   swal.close();
 });
 
-document.getElementById('main').addEventListener('change', (event) => {
-
-  if (event.target.checked) {
-    document.getElementById("parentCategory").disabled = true;
-  } else {
-    document.getElementById("parentCategory").disabled = false;
-  }
-})
 
 document.getElementById("btnSave").addEventListener("click", x => {
 
@@ -136,18 +117,6 @@ document.getElementById("btnCreate").addEventListener("click", x => {
 
 
 document.getElementById("addCategory").addEventListener("click", x => {
-
-  filterParents("DUH");
-
-  document.getElementById("btnCreate").hidden = false;
-  document.getElementById("btnSave").hidden = true;
-  document.getElementById("modal-title").innerText = "Afegir categoria"
-
-  document.getElementById("name").value = '';
-  document.getElementById("description").value = '';
-  document.getElementById("main").checked = false;
-  document.getElementById("parentCategory").disabled = false;
-
   $('#category-modal').modal();
 });
 
