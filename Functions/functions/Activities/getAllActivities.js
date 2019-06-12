@@ -1,6 +1,6 @@
 exports.handler = function (res, database) {
 
-    database.collection('activitiees').get().then(query => {
+    database.collection('activities').get().then(query => {
   
       var resArray = [];
   
