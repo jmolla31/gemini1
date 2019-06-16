@@ -16,7 +16,7 @@ exports.handler = function (req, res, database) {
         name: recievedBody.name,
         type: recievedBody.type,
         date: recievedBody.date,
-        description = recievedBody.description
+        description: recievedBody.description
     })
         .then(function () {
             res.status(200).send();

@@ -15,7 +15,7 @@ exports.handler = function (req, res, database) {
         name: x.data().name,
         type: x.data().type,
         date: x.data().date,
-        description = x.data().description
+        description: x.data().description
       };
   
       res.status(200).send(JSON.stringify(item));
