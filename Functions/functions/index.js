@@ -26,6 +26,15 @@ const getCategoryDetails = require('./Categories/getCategoryDetails');
 const updateCategory = require('./Categories/updateCategory');
 const deleteCategory = require('./Categories/deleteCategory');
 
+const getAllActivities = require('./Activities/getAllActivities.js');
+const getActivityDetails = require('./Activities/getActivityDetails.js');
+const addActivity = require('./Activities/addActivity.js');
+const deleteActivity = require('./Activities/deleteActivity.js');
+const updateActivity = require('./Activities/updateActivity.js');
+const getActivityParticipations = require('./Activities/getActivityParticipations.js');
+const addParticipation = require('./Activities/addParticipation.js');
+const deleteParticipation = require('./Activities/deleteParticipation.js');
+
 exports.getItemDetails = functions.https.onRequest((req, res) => { getItemDetails.handler(req, res, db, cors); });
 exports.getItemCount = functions.https.onRequest((req, res) => { getItemCount.handler(req, res, db, cors); });
 exports.getCategoryCount = functions.https.onRequest((req, res) => { getCategoryCount.handler(req, res, db, cors); });
@@ -39,3 +48,12 @@ exports.updateCategory = functions.https.onRequest((req, res) => { updateCategor
 exports.updateItem = functions.https.onRequest((req, res) => { updateItem.handler(req, res, db); });
 exports.deleteItem = functions.https.onRequest((req, res) => { deleteItem.handler(req, res, db); });
 exports.deleteCategory = functions.https.onRequest((req, res) => { deleteCategory.handler(req, res, db); });
+
+exports.getAllActivities = functions.https.onRequest((req, res) => { getAllActivities.handler(res, db); });
+exports.getActivityDetails = functions.https.onRequest((req, res) => { getActivityDetails.handler(req, res, db); });
+exports.addActivity = functions.https.onRequest((req, res) => { addActivity.handler(req, res, db); });
+exports.deleteActivity = functions.https.onRequest((req, res) => { deleteActivity.handler(req, res, db); });
+exports.updateActivity = functions.https.onRequest((req, res) => { updateActivity.handler(req, res, db); });
+exports.getActivityParticipations = functions.https.onRequest((req, res) => { getActivityParticipations.handler(req, res, db); });
+exports.addParticipation = functions.https.onRequest((req, res) => { addParticipation.handler(req, res, db); });
+exports.deleteParticipation = functions.https.onRequest((req, res) => { deleteParticipation.handler(req, res, db); });

@@ -8,6 +8,12 @@ const getCategoryDetailsUrl = "https://us-central1-gemini1-48753.cloudfunctions.
 const addCategoryUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/addCategory";
 const updateCategoryUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/updateCategory";
 const deleteCategoryUrl = "https://us-central1-gemini1-48753.cloudfunctions.net/deleteCategory";
+const getAllActivitiesUrl = "";
+const getActivityDetailsUrl = "";
+const getActivityParticipationsUrl = "";
+const addActivityUrl = "";
+const deleteActivityUrl = "";
+const updateActivityUrl = "";
 
 
 
