@@ -11,6 +11,8 @@ admin.firestore().settings({ timestampsInSnapshots: true });
 var db = admin.firestore();
 
 //Import all functions
+const prefire = require('./prefire');
+
 const getItemCount = require('./Items/getItemCount');
 const getLastItemsCount = require('./Items/getLastItemsCount');
 const getAllItems = require('./Items/getAllItems');
@@ -25,6 +27,8 @@ const getCategoryCount = require('./Categories/getCategoryCount');
 const getCategoryDetails = require('./Categories/getCategoryDetails');
 const updateCategory = require('./Categories/updateCategory');
 const deleteCategory = require('./Categories/deleteCategory');
+
+exports.prefire = functions.https.onRequest((res) => { prefire.handler(res); });
 
 exports.getItemDetails = functions.https.onRequest((req, res) => { getItemDetails.handler(req, res, db, cors); });
 exports.getItemCount = functions.https.onRequest((req, res) => { getItemCount.handler(req, res, db, cors); });
